@@ -1,0 +1,41 @@
+server:
+  # 랜덤 포트
+  port: 0
+
+spring:
+  application:
+    name: catalog-service
+  h2:
+    console:
+      enabled: true
+      settings:
+        web-allow-others: true
+      path: /h2-console
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:testdb
+#    username: sa
+#    password: 1234
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    generate-ddl: true
+
+eureka:
+  instance:
+    # 여러개를 실행시킬 때, 유레카 서버 웹 페이지에서 구분되어서 표시될 수 있도록 인스턴스 적용.
+    # random.value를 적용하지 않으면 server.port 값으로 표시하기 때문에 여러개를 실행시켜도 하나만 표시됨.
+    instance-id: ${spring.cloud.client.hostname}:${spring.application.instance_id:${random.value}}
+  client:
+    # eureka 서버에 등록
+    register-with-eureka: true
+    # eureka 서버에서 인스턴스 정보들을 주기적으로 받아옴
+    fetch-registry: true
+    # eureka 서버 위치
+    service-url:
+      defaultZone: http://127.0.0.1:8761/eureka
+
+logging:
+  level:
+    jy.study.inflearn.springcloud.catalogservice: DEBUG
