@@ -19,28 +19,31 @@ spring:
             baseMessage: Spring Cloud Gateway Global Filter
             preLogger: true
             postLogger: true
-
       routes:
-        - id: first-service
-          uri: lb://my-first-service
+        - id: user-service
+          uri: lb://user-service
           predicates:
-            - Path=/first-service/**
-          filters:
-#            - AddRequestHeader=first-request, first-request-header2
-#            - AddResponseHeader=first-response, first-response-header2
-            - CustomFilter
-        - id: second-service
-          uri: lb://my-second-service
-          predicates:
-            - Path=/second-service/**
-          filters:
-#            - AddRequestHeader=second-request, second-request-header2
-#            - AddResponseHeader=second-response, second-response-header2
-            - name: CustomFilter
-            - name: LoggingFilter
-              args:
-                baseMessage: Hi, there.
-                preLogger: true
-                postLogger: true
+            - Path=/user-service/**,/users/**
+#        - id: first-service
+#          uri: lb://my-first-service
+#          predicates:
+#            - Path=/first-service/**
+#          filters:
+##            - AddRequestHeader=first-request, first-request-header2
+##            - AddResponseHeader=first-response, first-response-header2
+#            - CustomFilter
+#        - id: second-service
+#          uri: lb://my-second-service
+#          predicates:
+#            - Path=/second-service/**
+#          filters:
+##            - AddRequestHeader=second-request, second-request-header2
+##            - AddResponseHeader=second-response, second-response-header2
+#            - name: CustomFilter
+#            - name: LoggingFilter
+#              args:
+#                baseMessage: Hi, there.
+#                preLogger: true
+#                postLogger: true
 
 
