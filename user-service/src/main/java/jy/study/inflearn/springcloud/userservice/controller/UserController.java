@@ -21,11 +21,10 @@ public class UserController {
 
     private final UserService userService;
 
+    private final ModelMapper mapper;
+
     @PostMapping
     public ResponseEntity<ResponseUser> createUser(@RequestBody RequestUser user) {
-        ModelMapper mapper = new ModelMapper();
-        mapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
-
         UserDto userDto = mapper.map(user, UserDto.class);
         userService.createUser(userDto);
 
