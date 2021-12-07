@@ -23,15 +23,20 @@ spring:
         - id: user-service
           uri: lb://user-service
           predicates:
-            - Path=/users/**
+            - Path=/user-service/**,/users/**
+            - Method=GET
+          filters:
+            - RemoveRequestHeader=Cookie
+            # ex) /user-service/health-check -> /health-check
+            - RewritePath=/user-service/(?<segment>.*), /$\{segment}
+            - AuthorizationHeaderFilter
         - id: user-service
           uri: lb://user-service
           predicates:
-            - Path=/user-service/**
-            - Method=POST,GET
+            - Path=/user-service/login,/users
+            - Method=POST
           filters:
             - RemoveRequestHeader=Cookie
-            # ex) /user-service/login -> /login
             - RewritePath=/user-service/(?<segment>.*), /$\{segment}
         - id: catalog-service
           uri: lb://catalog-service
@@ -64,3 +69,5 @@ spring:
 #                postLogger: true
 
 
+token:
+  secret: user_token
