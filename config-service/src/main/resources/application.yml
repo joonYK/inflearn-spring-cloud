@@ -7,4 +7,8 @@ spring:
     config:
       server:
         git:
-          uri: file:///Users/jeff/study/git-local-repo-yamls
+          #uri: file:///Users/jeff/study/inflearn-spring-cloud-config
+          uri: https://github.com/joonYK/inflearn-spring-cloud-config
+          #private repository 인 경우
+          #username:
+          #password:
