@@ -3,6 +3,11 @@ server:
 spring:
   application:
     name: config-server
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: guest
+    password: guest
   profiles:
     active: native
   cloud:
@@ -16,3 +21,9 @@ spring:
           #private repository 인 경우
           #username:
           #password:
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, busrefresh
